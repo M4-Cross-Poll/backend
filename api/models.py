@@ -4,11 +4,15 @@ from django.db import models
 class MuscleGroup(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=2000)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Activity(models.Model):
     name = models.CharField(max_length=255)
     muscle_groups = models.ManyToManyField(MuscleGroup)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Exercise(models.Model):
@@ -16,6 +20,8 @@ class Exercise(models.Model):
     description = models.CharField(max_length=2000)
     img_url = models.CharField(max_length=2083)
     muscle_groups = models.ManyToManyField(MuscleGroup)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class User(models.Model):
@@ -24,6 +30,8 @@ class User(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
 
 class UserActivity(models.Model):
@@ -33,3 +41,5 @@ class UserActivity(models.Model):
     forecast_img = models.CharField(max_length=255)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
