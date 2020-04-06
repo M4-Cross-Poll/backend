@@ -10,7 +10,7 @@ class MuscleGroup(models.Model):
 
 class Activity(models.Model):
     name = models.CharField(max_length=255)
-    muscle_groups = models.ManyToManyField(MuscleGroup)
+    muscle_groups = models.ManyToManyField(MuscleGroup, through='ActivityMuscleGroups')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -19,7 +19,7 @@ class Exercise(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=2000)
     img_url = models.CharField(max_length=2083)
-    muscle_groups = models.ManyToManyField(MuscleGroup)
+    muscle_groups = models.ManyToManyField(MuscleGroup, through='ExerciseMuscleGroups')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     equipment = models.CharField(max_length=2000)
@@ -45,3 +45,15 @@ class UserActivity(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class ExerciseMuscleGroups(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    muscle_group = models.ForeignKey(MuscleGroup, on_delete=models.CASCADE)
+    type = models.CharField(max_length=255)
+
+
+class ActivityMuscleGroups(models.Model):
+    activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    muscle_group = models.ForeignKey(MuscleGroup, on_delete=models.CASCADE)
+    type = models.CharField(max_length=255)
