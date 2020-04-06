@@ -22,6 +22,8 @@ class Exercise(models.Model):
     muscle_groups = models.ManyToManyField(MuscleGroup)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    equipment = models.CharField(max_length=2000)
+    instructions = models.CharField(max_length=2000)
 
 
 class User(models.Model):
