@@ -28,11 +28,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name']
 
 
-class UserActivitySerializer(serializers.ModelSerializer):
+class ScheduledActivitySerializer(serializers.ModelSerializer):
     activity = ActivitySerializer()
     user = UserSerializer()
     class Meta:
-        model = UserActivity
+        model = ScheduledActivity
         fields = ['id', 'date', 'location', 'forecast', 'forecast_img', 'activity', 'user', 'created_at', 'updated_at']
 
 

@@ -36,7 +36,7 @@ class User(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class UserActivity(models.Model):
+class ScheduledActivity(models.Model):
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
     forecast = models.CharField(max_length=255)
