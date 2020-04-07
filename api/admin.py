@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Activity, MuscleGroup, Exercise, User, UserActivity
+from .models import *
 # Register your models here.
 
 class ActivityAdmin(admin.ModelAdmin):
@@ -11,19 +11,23 @@ class MuscleGroupAdmin(admin.ModelAdmin):
 
 
 class ExerciseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description', 'img_url', 'created_at', 'updated_at')
+    list_display = ('id', 'name', 'description', 'img_url', 'equipment', 'instructions', 'created_at', 'updated_at')
 
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('id', 'username', 'password_digest', 'first_name', 'last_name', 'email', 'created_at', 'updated_at')
 
 
-class UserActivityAdmin(admin.ModelAdmin):
+class ScheduledActivityAdmin(admin.ModelAdmin):
     list_display = ('id', 'date', 'location', 'forecast', 'forecast_img', 'activity', 'user', 'created_at', 'updated_at')
 
+
+class ActivityMuscleGroupAdmin(admin.ModelAdmin):
+    list_display = ('id', 'activity_id', 'muscle_group_id')
 
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(MuscleGroup, MuscleGroupAdmin)
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(User, UserAdmin)
-admin.site.register(UserActivity, UserActivityAdmin)
+admin.site.register(ScheduledActivity, ScheduledActivityAdmin)
+admin.site.register(ActivityMuscleGroups, ActivityMuscleGroupAdmin)

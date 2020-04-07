@@ -1,0 +1,21 @@
+[
+  { "model": "api.activity", "pk": 1, "fields": { "name": "Mountain Biking","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 2, "fields": { "name": "Hiking","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 3, "fields": { "name": "Road Biking","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 4, "fields": { "name": "Baseball","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 5, "fields": { "name": "Golf","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 6, "fields": { "name": "Cricket","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 7, "fields": { "name": "Diving","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 8, "fields": { "name": "Soccer","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 9, "fields": { "name": "Football","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 10, "fields": { "name": "Frisbee","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 11, "fields": { "name": "Horeseback Riding","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 12, "fields": { "name": "Kayaking","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 13, "fields": { "name": "Stand-up Paddle Boarding","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 14, "fields": { "name": "Rafting","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 15, "fields": { "name": "Snowboarding","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 16, "fields": { "name": "Skiing","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 17, "fields": { "name": "Paragliding","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 18, "fields": { "name": "Rock Climbing","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} },
+  { "model": "api.activity", "pk": 19, "fields": { "name": "Running","created_at": "2020-04-07T14:18:41Z" , "updated_at": "2020-04-07T14:18:41Z"} }
+]
