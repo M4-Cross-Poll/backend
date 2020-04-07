@@ -12,7 +12,7 @@ def exercise_show(request, exercise_id):
     serializer = ExerciseSerializer(queryset)
     return JsonResponse(serializer.data)
 
-def user_activity(request, user_activity_id):
-    queryset = UserActivity.objects.get(id=user_activity_id)
-    serializer = UserActivitySerializer(queryset)
+def scheduled_activity_show(request, scheduled_activity_id):
+    queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
+    serializer = ScheduledActivitySerializer(queryset)
     return JsonResponse(serializer.data)
