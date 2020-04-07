@@ -4,7 +4,7 @@ from rest_framework import serializers
 class ActivityExerciseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exercise
-        fields = ['id', 'name', 'description', 'img_url']
+        fields = ['id', 'name', 'description', 'img_url', 'equipment', 'instructions']
 
 
 class MuscleGroupSerializer(serializers.ModelSerializer):
@@ -36,8 +36,13 @@ class ScheduledActivitySerializer(serializers.ModelSerializer):
         fields = ['id', 'date', 'location', 'forecast', 'forecast_img', 'activity', 'user', 'created_at', 'updated_at']
 
 
+class ExerciseMuscleGroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MuscleGroup
+        fields = ['id', 'name']
+
 class ExerciseSerializer(serializers.ModelSerializer):
-    muscle_groups = MuscleGroupSerializer(many=True)
+    muscle_groups = ExerciseMuscleGroupSerializer(many=True)
     class Meta:
         model = Exercise
-        fields = ['id', 'name', 'description', 'img_url', 'muscle_groups']
+        fields = ['id', 'name', 'description', 'img_url', 'equipment', 'instructions', 'muscle_groups']
