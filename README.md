@@ -353,6 +353,7 @@
    "last_name": user,
    "scheduled_activities": [
        {
+        "id": 1,
         "activity_name": "Mountain Biking",
         "date": "2020-04-10",
         "location": "Denver, CO",
@@ -360,6 +361,7 @@
         "forecast_img": "sunny"
        } ,
       {
+        "id": 2,
         "activity_name": "Kayaking",
         "date": "2020-04-22",
         "location": "Golden, CO",
