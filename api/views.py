@@ -27,3 +27,10 @@ def scheduled_activity_show(request, scheduled_activity_id):
     queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
     serializer = ScheduledActivitySerializer(queryset)
     return JsonResponse(serializer.data)
+
+
+def user_scheduled_activity_index(request, user_id):
+    queryset = User.objects.get(id=user_id)
+    # import pdb; pdb.set_trace()
+    serializer = UserSerializer(queryset)
+    return JsonResponse(serializer.data)
