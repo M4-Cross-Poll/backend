@@ -403,7 +403,7 @@
    "scheduled_activities": [
        {
         "id": 1,
-        "activity_name": "Mountain Biking",
+        "activity": "Mountain Biking",
         "date": "2020-04-10",
         "location": "Denver, CO",
         "forecast": "Sunny",
@@ -411,7 +411,7 @@
        } ,
       {
         "id": 2,
-        "activity_name": "Kayaking",
+        "activity": "Kayaking",
         "date": "2020-04-22",
         "location": "Golden, CO",
         "forecast": "Overcast",
