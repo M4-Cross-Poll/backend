@@ -343,3 +343,29 @@
     "updated_at": "2020-04-03T03:23:26.122555Z"
 },
 ```
+
+- GET `/api/v1/:user_id/scheduled_activities`
+```
+{
+   "id": 1,
+   "username": "test_user",
+   "first_name": test,
+   "last_name": user,
+   "scheduled_activities": [
+       {
+        "activity_name": "Mountain Biking",
+        "date": "2020-04-10",
+        "location": "Denver, CO",
+        "forecast": "Sunny",
+        "forecast_img": "sunny"
+       } ,
+      {
+        "activity_name": "Kayaking",
+        "date": "2020-04-22",
+        "location": "Golden, CO",
+        "forecast": "Overcast",
+        "forecast_img": "cloudy"
+       } ,
+   ]
+}
+```
