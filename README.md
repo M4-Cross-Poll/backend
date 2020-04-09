@@ -3,7 +3,38 @@
 
 ## Endpoints
 
-- GET '/api/v1/exercise/<int:exercise_id>'
+- GET `/api/v1/exercises`
+```
+[
+    {
+        "id": 1,
+        "name": "180-twisting-jump-squats",
+        "description": "Targets calves and hamstrings and quadriceps and also involves abs and glutes & hip flexors.",
+        "img_url": "",
+        "equipment": "NO EQUIPMENT",
+        "instructions": "Begin standing tall with a tight core. Your chest will be up and your gaze will be straight ahead. Bend at the knees and drive your hips back as you lower yourself into a squat position. Launch yourself up while simultaneously twisting to the other side. Your body will perform a 180 degree turn in midair. Land with bent knees and immediately go right into another jump squat, turning to the starting position. Repeat this alternating pattern."
+    },
+    {
+        "id": 2,
+        "name": "ab-crunch-machine",
+        "description": "Targets abs.",
+        "img_url": "",
+        "equipment": "Full gym",
+        "instructions": "Sit on the ab machine and select a slight resistance. Position your feet under the pads and grab hold of the top handles. Make sure your arms are bent at 90 degrees and rest your triceps on the pads. Begin lifting your legs up as you engage your abs and crunch your upper torso. Exhale as you do so. Pause and slowly return to starting position as you inhale."
+    },
+    {
+        "id": 3,
+        "name": "agility-ladder-drills",
+        "description": "Targets abs and calves and glutes & hip flexors and hamstrings and lower back and quadriceps and also involves biceps and shoulders and triceps.",
+        "img_url": "",
+        "equipment": "Agility Ladder",
+        "instructions": "Lay out the agility ladder on a non-slip surface.  Perform a routine of choice."
+    },
+    ...
+]
+```
+
+- GET `/api/v1/exercise/<int:exercise_id>`
 ```
 {
   "id": 1,
@@ -39,6 +70,24 @@
     ]
   ]
 }
+```
+
+- GET `/api/v1/activities`
+```
+[
+    {
+        "id": 1,
+        "name": "Mountain Biking"
+    },
+    {
+        "id": 2,
+        "name": "Hiking"
+    },
+    {
+        "id": 3,
+        "name": "Road Biking"
+    },
+    ...
 ```
 
 - GET `/api/v1/scheduled_activities/<int:scheduled_activity_id>`

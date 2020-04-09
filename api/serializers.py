@@ -41,8 +41,21 @@ class ExerciseMuscleGroupSerializer(serializers.ModelSerializer):
         model = MuscleGroup
         fields = ['id', 'name']
 
+
 class ExerciseSerializer(serializers.ModelSerializer):
     muscle_groups = ExerciseMuscleGroupSerializer(many=True)
     class Meta:
         model = Exercise
-        fields = ['id', 'name', 'description', 'img_url', 'equipment', 'instructions', 'muscle_groups']
+        fields = ['id', 'name', 'description', 'img_url', 'equipment', 'instructions', 'muscle_groups', 'primary_muscles', 'secondary_muscles']
+
+
+class ExerciseIndexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exercise
+        fields = ['id', 'name', 'description', 'img_url', 'equipment', 'instructions']
+
+
+class ActivityIndexSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Activity
+        fields = ['id', 'name']
