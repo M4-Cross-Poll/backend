@@ -14,6 +14,9 @@ class Activity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Exercise(models.Model):
     name = models.CharField(max_length=255)
@@ -24,7 +27,7 @@ class Exercise(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     equipment = models.CharField(max_length=2000)
     instructions = models.CharField(max_length=2000)
-
+    
     # def primary_muscles(self):
     #     return ['biceps', 'triceps']
     #     return self.objects.filter(MuscleGroup__name='Abs')
@@ -41,6 +44,9 @@ class User(models.Model):
     email = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def scheduled_activities(self):
+        return ScheduledActivity.objects.filter(user=self.id)
 
 
 class ScheduledActivity(models.Model):
