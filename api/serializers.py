@@ -22,10 +22,18 @@ class ActivitySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'muscle_groups']
 
 
+class ScheduledActivityIndexSerializer(serializers.ModelSerializer):
+    activity = serializers.StringRelatedField()
+    class Meta:
+        model = ScheduledActivity
+        fields = ['id', 'activity', 'date', 'location', 'forecast', 'forecast_img']
+
+
 class UserSerializer(serializers.ModelSerializer):
+    scheduled_activities = ScheduledActivityIndexSerializer(many=True)
     class Meta:
         model = User
-        fields = ['id', 'first_name', 'last_name']
+        fields = ['id', 'username', 'first_name', 'last_name', 'scheduled_activities']
 
 
 class ScheduledActivitySerializer(serializers.ModelSerializer):
