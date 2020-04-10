@@ -27,13 +27,6 @@ class Exercise(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     equipment = models.CharField(max_length=2000)
     instructions = models.CharField(max_length=2000)
-    
-    # def primary_muscles(self):
-    #     return ['biceps', 'triceps']
-    #     return self.objects.filter(MuscleGroup__name='Abs')
-    #
-    # def secondary_muscles(self):
-    #     return ['quadriceps', 'calves']
 
 
 class User(models.Model):
