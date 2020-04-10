@@ -15,11 +15,27 @@ class MuscleGroupSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'exercise_set']
 
 
+class PrimaryMuscleGroupSerializer(serializers.ModelSerializer):
+    primary_exercises = ActivityExerciseSerializer(many=True)
+    class Meta:
+        model = MuscleGroup
+        fields = ['id', 'name', 'primary_exercises']
+
+
+class SecondaryMuscleGroupSerializer(serializers.ModelSerializer):
+    secondary_exercises = ActivityExerciseSerializer(many=True)
+    class Meta:
+        model = MuscleGroup
+        fields = ['id', 'name', 'secondary_exercises']
+
+
 class ActivitySerializer(serializers.ModelSerializer):
-    muscle_groups = MuscleGroupSerializer(many=True)
+    # muscle_groups = MuscleGroupSerializer(many=True)
+    primary_muscles = PrimaryMuscleGroupSerializer(many=True)
+    secondary_muscles = SecondaryMuscleGroupSerializer(many=True)
     class Meta:
         model = Activity
-        fields = ['id', 'name', 'muscle_groups']
+        fields = ['id', 'name', 'primary_muscles', 'secondary_muscles']
 
 
 class ScheduledActivityIndexSerializer(serializers.ModelSerializer):
