@@ -7,6 +7,11 @@ class MuscleGroup(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def primary_exercises(self):
+        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'primary' LIMIT 5")
+
+    def secondary_exercises(self):
+        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'secondary' LIMIT 5")
 
 class Activity(models.Model):
     name = models.CharField(max_length=255)
@@ -16,6 +21,12 @@ class Activity(models.Model):
 
     def __str__(self):
         return self.name
+
+    def primary_muscles(self):
+        return MuscleGroup.objects.raw(f"SELECT * FROM api_musclegroup JOIN api_activitymusclegroups ON api_activitymusclegroups.muscle_group_id = api_musclegroup.id WHERE api_activitymusclegroups.activity_id = {self.id} AND api_activitymusclegroups.type = 'primary'")
+
+    def secondary_muscles(self):
+        return MuscleGroup.objects.raw(f"SELECT * FROM api_musclegroup JOIN api_activitymusclegroups ON api_activitymusclegroups.muscle_group_id = api_musclegroup.id WHERE api_activitymusclegroups.activity_id = {self.id} AND api_activitymusclegroups.type = 'secondary'")
 
 
 class Exercise(models.Model):
