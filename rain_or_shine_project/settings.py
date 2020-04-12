@@ -135,4 +135,5 @@ django_heroku.settings(locals())
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:19006",
+    "10.0.0.144:19000",
 ]
