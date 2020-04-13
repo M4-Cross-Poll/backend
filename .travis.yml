@@ -7,5 +7,8 @@ python:
 install:
   - pip install -r requirements.txt
 
+services:
+  - postgresql
+
 script:
   - python3 manage.py test
