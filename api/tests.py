@@ -1,6 +1,8 @@
 from django.test import TestCase
 from api.external_services.darksky_service import DarkskyService
 from api.external_services.geocode_service import GeocodeService
+from django.test import Client
+from api.models import *
 # Create your tests here.
 
 class DarkskyServiceTestCase(TestCase):
@@ -45,3 +47,13 @@ class GeocodeServiceTestCase(TestCase):
         service = GeocodeService()
         response = service.get_coordinates('denver,co')
         self.assertEqual(response, expected_response)
+
+
+class NewScheduledActivity(TestCase):
+    def test_it_can_receive_a_request_body(self):
+        user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
+
+        c = Client()
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": "Hiking", "date": "2020-04-20", "location": "Golden, CO"})
+
+        self.assertEqual("this should be good", response)
