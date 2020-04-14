@@ -30,7 +30,7 @@ def activity_index(request):
     return JsonResponse(serializer.data, safe=False)
 
 
-def scheduled_activity_show(request, scheduled_activity_id):
+def scheduled_activity_show(request, user_id, scheduled_activity_id):
     queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
     serializer = ScheduledActivitySerializer(queryset)
     return JsonResponse(serializer.data)
