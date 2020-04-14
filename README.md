@@ -90,7 +90,7 @@
     ...
 ```
 
-- GET `/api/v1/scheduled_activities/<int:scheduled_activity_id>`
+- GET `/api/v1/user/<int:user_id>/scheduled_activities/<int:scheduled_activity_id>`
 
 ```
 {
