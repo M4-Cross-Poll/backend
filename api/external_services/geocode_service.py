@@ -1,5 +1,7 @@
 import requests
-from django.conf import settings
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class GeocodeService:
 
@@ -9,5 +11,7 @@ class GeocodeService:
 
     # returns a hash of lat: and long:
     def get_coordinates(self, location):
-        coordinates_json = self.get_json(f'address={location}&key={settings.GEOCODE_API_KEY}')
+        api_key = os.getenv('GEOCODE_API_KEY')
+        coordinates_json = self.get_json(f'address={location}&key={api_key}')
+        # coordinates_json = self.get_json(f'address={location}&key={env('GEOCODE_API_KEY')}')
         return coordinates_json["results"][0]["geometry"]["location"]

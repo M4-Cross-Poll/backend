@@ -1,10 +1,13 @@
 import requests
-from django.conf import settings
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 class DarkskyService:
 
     def get_json(self, uri):
-        response = requests.get(f'https://api.darksky.net/forecast/{settings.DARKSKY_API_KEY}/{uri}')
+        api_key = os.getenv('DARKSKY_API_KEY')
+        response = requests.get(f'https://api.darksky.net/forecast/{api_key}/{uri}')
         return response.json()
 
     def get_forecast(self, lat, lng, time):
