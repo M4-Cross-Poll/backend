@@ -28,6 +28,46 @@ class DarkskyServiceTestCase(TestCase):
                                     "uvIndex": 0,
                                     "visibility": 9.997
                                 },
+                                "daily": {
+                                    "data": [
+                                        {
+                                            "time": 255596400,
+                                            "summary": "Foggy until morning, starting again in the evening.",
+                                            "icon": "cloudy",
+                                            "sunriseTime": 255621840,
+                                            "sunsetTime": 255659220,
+                                            "moonPhase": 0.98,
+                                            "precipIntensity": 0,
+                                            "precipIntensityMax": 0,
+                                            "precipProbability": 0,
+                                            "temperatureHigh": 47.44,
+                                            "temperatureHighTime": 255650160,
+                                            "temperatureLow": 25.41,
+                                            "temperatureLowTime": 255682680,
+                                            "apparentTemperatureHigh": 43.4,
+                                            "apparentTemperatureHighTime": 255650100,
+                                            "apparentTemperatureLow": 17.4,
+                                            "apparentTemperatureLowTime": 255710940,
+                                            "dewPoint": 25.32,
+                                            "humidity": 0.8,
+                                            "pressure": 1009.5,
+                                            "windSpeed": 5.18,
+                                            "windBearing": 18,
+                                            "cloudCover": 0.9,
+                                            "uvIndex": 3,
+                                            "uvIndexTime": 255641100,
+                                            "visibility": 2.843,
+                                            "temperatureMin": 26.13,
+                                            "temperatureMinTime": 255679200,
+                                            "temperatureMax": 47.44,
+                                            "temperatureMaxTime": 255650160,
+                                            "apparentTemperatureMin": 19.16,
+                                            "apparentTemperatureMinTime": 255671640,
+                                            "apparentTemperatureMax": 43.4,
+                                            "apparentTemperatureMaxTime": 255650100
+                                        }
+                                    ]
+                                },
                                 "offset": -7
                             }
 
@@ -51,9 +91,12 @@ class GeocodeServiceTestCase(TestCase):
 
 class NewScheduledActivity(TestCase):
     def test_it_can_receive_a_request_body(self):
+        Activity.objects.create(name="Hiking")
+        Activity.objects.create(name="Mountain Biking")
+
         user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
 
         c = Client()
         response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": "Hiking", "date": "2020-04-20", "location": "Golden, CO"})
 
-        self.assertEqual("this should be good", response)
+        self.assertEqual(200, response.status_code)
