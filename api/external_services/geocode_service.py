@@ -1,5 +1,4 @@
 import requests
-from django.conf import settings
 import os
 from dotenv import load_dotenv
 load_dotenv()
