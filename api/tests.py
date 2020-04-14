@@ -90,7 +90,7 @@ class GeocodeServiceTestCase(TestCase):
 
 
 class NewScheduledActivity(TestCase):
-    def test_it_can_receive_a_request_body(self):
+    def test_it_can_receive_a_request_body_and_create_a_new_activity(self):
         Activity.objects.create(name="Hiking")
         Activity.objects.create(name="Mountain Biking")
 
@@ -100,3 +100,38 @@ class NewScheduledActivity(TestCase):
         response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": "Hiking", "date": "2020-04-20", "location": "Golden, CO"})
 
         self.assertEqual(200, response.status_code)
+
+    def test_status_property(self):
+        activity = Activity.objects.create(name="Kayaking")
+
+        user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
+
+        scheduled_activity = ScheduledActivity.objects.create(
+            date="2020-04-15",
+            location="Denver, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        self.assertEqual("good", scheduled_activity.status)
+
+        scheduled_activity.forecast_img = "rain"
+        scheduled_activity.save()
+
+        self.assertEqual("bad", scheduled_activity.status)
+
+        scheduled_activity.forecast_img = "sleet"
+        scheduled_activity.save()
+
+        self.assertEqual("bad", scheduled_activity.status)
+
+        scheduled_activity.forecast_img = "cloudy"
+        scheduled_activity.save()
+
+        self.assertEqual("good", scheduled_activity.status)
