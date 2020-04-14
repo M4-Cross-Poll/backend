@@ -3,6 +3,5 @@ __pycache__/
 *.cpython-38.pyc
 */__pycache__/*
 *__pycache__*
-local_settings.py
 .coverage
 .env
