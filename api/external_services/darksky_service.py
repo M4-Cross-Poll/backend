@@ -11,5 +11,5 @@ class DarkskyService:
         return response.json()
 
     def get_forecast(self, lat, lng, time):
-        uri = f'{lat},{lng},{time}?exclude=hourly,daily,alerts,flags'
+        uri = f'{lat},{lng},{time}?exclude=hourly,alerts,flags'
         return self.get_json(uri)

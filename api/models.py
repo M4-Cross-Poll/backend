@@ -57,11 +57,22 @@ class ScheduledActivity(models.Model):
     date = models.DateTimeField()
     location = models.CharField(max_length=255)
     forecast = models.CharField(max_length=255)
+    temperature = models.DecimalField(max_digits=5, decimal_places=2)
+    temp_hi = models.DecimalField(max_digits=5, decimal_places=2)
+    temp_low = models.DecimalField(max_digits=5, decimal_places=2)
+    precip_probability = models.DecimalField(max_digits=5, decimal_places=2)
     forecast_img = models.CharField(max_length=255)
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    @property
+    def status(self):
+        bad_weather = ["rain", "snow", "sleet", "wind"]
+        if self.forecast_img in bad_weather:
+            return "bad"
+        return "good"
 
 
 class ExerciseMuscleGroups(models.Model):

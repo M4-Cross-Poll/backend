@@ -9,7 +9,6 @@ class GeocodeService:
         response = requests.get(f'https://maps.googleapis.com/maps/api/geocode/json?{uri}')
         return response.json()
 
-    # returns a hash of lat: and long:
     def get_coordinates(self, location):
         api_key = os.getenv('GEOCODE_API_KEY')
         coordinates_json = self.get_json(f'address={location}&key={api_key}')
