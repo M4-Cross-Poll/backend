@@ -8,10 +8,10 @@ class MuscleGroup(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def primary_exercises(self):
-        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'primary' LIMIT 5")
+        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'primary' ORDER BY RANDOM() LIMIT 1")
 
     def secondary_exercises(self):
-        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'secondary' LIMIT 5")
+        return Exercise.objects.raw(f"SELECT * FROM api_exercise JOIN api_exercisemusclegroups ON api_exercise.id = api_exercisemusclegroups.exercise_id WHERE api_exercisemusclegroups.muscle_group_id = {self.id} AND api_exercisemusclegroups.type = 'secondary' ORDER BY RANDOM() LIMIT 1")
 
 class Activity(models.Model):
     name = models.CharField(max_length=255)
