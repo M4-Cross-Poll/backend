@@ -95,10 +95,15 @@
 ```
 {
     "id": 1,
+    "status": "good",
     "date": "2020-04-07T20:42:24Z",
     "location": "Denver, CO",
     "forecast": "Sunny",
     "forecast_img": "sunshine",
+    "temperature": "55.10",
+    "temp_hi": "73.25",
+    "temp_low": "45.76",
+    "precip_probability": "0.05",
     "activity": {
         "id": 1,
         "name": "Mountain Biking",
@@ -253,6 +258,7 @@
         "scheduled_activities": [
             {
                 "id": 1,
+                "status": "good",
                 "activity": "Mountain Biking",
                 "date": "2020-04-07T20:42:24Z",
                 "location": "Denver, CO",
@@ -261,11 +267,30 @@
             },
             {
                 "id": 2,
+                "status": "good",
                 "activity": "Frisbee",
                 "date": "2020-04-09T22:37:44Z",
                 "location": "Breckenridge, CO",
                 "forecast": "Overcast",
                 "forecast_img": "cloudy"
+            },
+            {
+                "id": 3,
+                "status": "bad",
+                "activity": "Mountain Biking",
+                "date": "2020-04-16T00:00:00Z",
+                "location": "Denver, CO",
+                "forecast": "Possible light snow (2–4 in.) in the morning.",
+                "forecast_img": "snow"
+            },
+            {
+                "id": 4,
+                "status": "bad",
+                "activity": "Cricket",
+                "date": "2020-04-21T00:00:00Z",
+                "location": "Breckenridge, CO",
+                "forecast": "Foggy until afternoon, starting again overnight.",
+                "forecast_img": "rain"
             }
         ]
     },
@@ -274,30 +299,50 @@
 }
 ```
 
-- GET `/api/v1/:user_id/scheduled_activities`
+- GET `/api/v1/users/:user_id/scheduled_activities`
 ```
 {
-   "id": 1,
-   "username": "test_user",
-   "first_name": test,
-   "last_name": user,
-   "scheduled_activities": [
-       {
-        "id": 1,
-        "activity": "Mountain Biking",
-        "date": "2020-04-10",
-        "location": "Denver, CO",
-        "forecast": "Sunny",
-        "forecast_img": "sunny"
-       } ,
-      {
-        "id": 2,
-        "activity": "Kayaking",
-        "date": "2020-04-22",
-        "location": "Golden, CO",
-        "forecast": "Overcast",
-        "forecast_img": "cloudy"
-       } ,
-   ]
+    "id": 1,
+    "username": "user",
+    "first_name": "user",
+    "last_name": "name",
+    "scheduled_activities": [
+        {
+            "id": 1,
+            "status": "good",
+            "activity": "Mountain Biking",
+            "date": "2020-04-07T20:42:24Z",
+            "location": "Denver, CO",
+            "forecast": "Sunny",
+            "forecast_img": "sunshine"
+        },
+        {
+            "id": 2,
+            "status": "good",
+            "activity": "Frisbee",
+            "date": "2020-04-09T22:37:44Z",
+            "location": "Breckenridge, CO",
+            "forecast": "Overcast",
+            "forecast_img": "cloudy"
+        },
+        {
+            "id": 3,
+            "status": "bad",
+            "activity": "Mountain Biking",
+            "date": "2020-04-16T00:00:00Z",
+            "location": "Denver, CO",
+            "forecast": "Possible light snow (2–4 in.) in the morning.",
+            "forecast_img": "snow"
+        },
+        {
+            "id": 4,
+            "status": "bad",
+            "activity": "Cricket",
+            "date": "2020-04-21T00:00:00Z",
+            "location": "Breckenridge, CO",
+            "forecast": "Foggy until afternoon, starting again overnight.",
+            "forecast_img": "rain"
+        }
+    ]
 }
 ```
