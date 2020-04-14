@@ -4,4 +4,4 @@ requests==2.23.0
 django-heroku
 gunicorn
 django-cors-headers
-django-environ
+python-dotenv
