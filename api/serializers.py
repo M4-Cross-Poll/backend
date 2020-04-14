@@ -57,7 +57,7 @@ class ScheduledActivitySerializer(serializers.ModelSerializer):
     user = UserSerializer()
     class Meta:
         model = ScheduledActivity
-        fields = ['id', 'date', 'location', 'forecast', 'forecast_img', 'activity', 'user', 'created_at', 'updated_at']
+        fields = ['id', 'date', 'location', 'forecast', 'forecast_img', 'temperature', 'temp_hi', 'temp_low', 'precip_probability', 'activity', 'user', 'created_at', 'updated_at']
 
 
 class ExerciseMuscleGroupSerializer(serializers.ModelSerializer):
