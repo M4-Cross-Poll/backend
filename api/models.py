@@ -67,6 +67,13 @@ class ScheduledActivity(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def status(self):
+        bad_weather = ["rain", "snow", "sleet", "wind"]
+        if self.forecast_img in bad_weather:
+            return "bad"
+        return "good"
+
 
 class ExerciseMuscleGroups(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
