@@ -91,13 +91,12 @@ class GeocodeServiceTestCase(TestCase):
 
 class NewScheduledActivity(TestCase):
     def test_it_can_receive_a_request_body_and_create_a_new_activity(self):
-        Activity.objects.create(name="Hiking")
-        Activity.objects.create(name="Mountain Biking")
+        activity = Activity.objects.create(name="Hiking")
 
         user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
 
         c = Client()
-        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": "Hiking", "date": "2020-04-20", "location": "Golden, CO"})
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_id": f"{activity.id}", "date": "2020-04-20", "location": "Golden, CO"})
 
         self.assertEqual(200, response.status_code)
 
