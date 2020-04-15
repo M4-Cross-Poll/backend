@@ -43,7 +43,7 @@ def user_scheduled_activity_index(request, user_id):
 
 @api_view(['POST'])
 def create_scheduled_activity(request, user_id):
-    activity = Activity.objects.get(id=request.data["activity_id"])
+    activity = Activity.objects.get(name=request.data["activity_name"])
     date = parse_date(request.data["date"])
     location = request.data["location"]
     user = User.objects.get(id=user_id)

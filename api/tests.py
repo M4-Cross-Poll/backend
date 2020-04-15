@@ -96,7 +96,7 @@ class NewScheduledActivity(TestCase):
         user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
 
         c = Client()
-        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_id": f"{activity.id}", "date": "2020-04-20", "location": "Golden, CO"})
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": f"{activity.name}", "date": "2020-04-20", "location": "Golden, CO"})
 
         self.assertEqual(200, response.status_code)
 
