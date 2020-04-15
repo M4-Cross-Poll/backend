@@ -71,6 +71,8 @@ def create_scheduled_activity(request, user_id):
     new_scheduled_activity = ScheduledActivity.objects.create(
         date=request.data["date"],
         location=location,
+        latitude = coordinates["lat"],
+        longitude = coordinates["lng"],
         forecast=forecast["daily"]["data"][0]["summary"],
         forecast_img=forecast["daily"]["data"][0]["icon"],
         temperature=forecast["currently"]["temperature"],
