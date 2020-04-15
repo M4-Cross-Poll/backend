@@ -67,23 +67,23 @@ def create_scheduled_activity(request, user_id):
     except User.DoesNotExist:
         return JsonResponse(f"User with ID {user_id} could not be found.", status=404, safe=False)
 
-    location = request.data["location"]
+    location_input = request.data["location"]
 
     try:
-        coordinates = GeocodeService().get_coordinates(location)
+        location_data = GeocodeService().get_coordinates(location_input)
     except NameError:
         return JsonResponse(f"The location provided could not be geocoded. Please be more specific (include state or country).", status=500, safe=False)
 
     try:
         date = parse_date(request.data["date"])
-        forecast = DarkskyService().get_forecast(coordinates["lat"], coordinates["lng"], date)
+        forecast = DarkskyService().get_forecast(location_data["geometry"]["location"]["lat"], location_data["geometry"]["location"]["lng"], date)
     except:
         return JsonResponse("The date provided could not be parsed correctly. Please ensure it is in the format of 'YYYY-MM-DD'", status=400, safe=False)
 
     try:
         new_scheduled_activity = ScheduledActivity.objects.create(
             date=request.data["date"],
-            location=location,
+            location=parse_location(location_data["formatted_address"]),
             forecast=forecast["daily"]["data"][0]["summary"],
             forecast_img=forecast["daily"]["data"][0]["icon"],
             temperature=forecast["currently"]["temperature"],
