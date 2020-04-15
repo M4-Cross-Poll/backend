@@ -12,5 +12,7 @@ class GeocodeService:
     def get_coordinates(self, location):
         api_key = os.getenv('GEOCODE_API_KEY')
         coordinates_json = self.get_json(f'address={location}&key={api_key}')
-        # coordinates_json = self.get_json(f'address={location}&key={env('GEOCODE_API_KEY')}')
-        return coordinates_json["results"][0]["geometry"]["location"]
+        if coordinates_json["status"] == "OK":
+            return coordinates_json["results"][0]["geometry"]["location"]
+        else:
+            raise NameError("Invalid Location")
