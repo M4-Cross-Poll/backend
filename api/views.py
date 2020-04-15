@@ -35,7 +35,7 @@ def scheduled_activity(request, user_id, scheduled_activity_id):
         try:
             queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
         except:
-            return HttpResponse('Record not found', status=404)
+            return JsonResponse('Record not found', status=404, safe=False)
 
         serializer = ScheduledActivitySerializer(queryset)
         return JsonResponse(serializer.data)
@@ -44,13 +44,13 @@ def scheduled_activity(request, user_id, scheduled_activity_id):
         try:
             scheduled_activity = ScheduledActivity.objects.get(id=scheduled_activity_id)
         except:
-            return HttpResponse('Record not found', status=404)
+            return JsonResponse('Record not found', status=404, safe=False)
 
         try:
             scheduled_activity.delete()
-            return HttpResponse('Deleted successfully', status=204)
+            return JsonResponse('Deleted successfully', status=204, safe=False)
         except:
-            return HttpResponse('Unable to delete record', status=500)
+            return JsonResponse('Unable to delete record', status=500, safe=False)
 
 def user_scheduled_activity_index(request, user_id):
     queryset = User.objects.get(id=user_id)
