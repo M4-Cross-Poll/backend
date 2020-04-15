@@ -54,8 +54,10 @@ class User(models.Model):
 
 
 class ScheduledActivity(models.Model):
-    date = models.DateTimeField()
+    date = models.CharField(max_length=10, default="yyyy-mm-dd")
     location = models.CharField(max_length=255)
+    latitude = models.DecimalField(max_digits=10, decimal_places=6, default=0)
+    longitude = models.DecimalField(max_digits=10, decimal_places=6, default=0)
     forecast = models.CharField(max_length=255)
     temperature = models.DecimalField(max_digits=5, decimal_places=2)
     temp_hi = models.DecimalField(max_digits=5, decimal_places=2)
