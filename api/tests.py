@@ -134,3 +134,65 @@ class NewScheduledActivity(TestCase):
         scheduled_activity.save()
 
         self.assertEqual("good", scheduled_activity.status)
+
+    def test_it_can_be_deleted(self):
+        activity = Activity.objects.create(name="Kayaking")
+
+        user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
+
+        scheduled_activity_1 = ScheduledActivity.objects.create(
+            date="2020-04-15",
+            location="Denver, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        scheduled_activity_2 = ScheduledActivity.objects.create(
+            date="2020-04-19",
+            location="Fort Collins, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        c = Client()
+
+        response = c.delete(f'/api/v1/users/{user.id}/scheduled_activities/{scheduled_activity_1.id}')
+
+        self.assertEqual(204, response.status_code)
+        self.assertEqual(scheduled_activity_2, ScheduledActivity.objects.all()[0])
+
+    def test_bad_delete_request_returns_404(self):
+        activity = Activity.objects.create(name="Kayaking")
+
+        user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
+
+        scheduled_activity_1 = ScheduledActivity.objects.create(
+            date="2020-04-15",
+            location="Denver, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        c = Client()
+
+        response = c.delete(f'/api/v1/users/{user.id}/scheduled_activities/5')
+
+        self.assertEqual(404, response.status_code)

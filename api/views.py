@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from api.models import *
 from api.serializers import *
@@ -29,12 +29,28 @@ def activity_index(request):
     serializer = ActivityIndexSerializer(queryset, many=True)
     return JsonResponse(serializer.data, safe=False)
 
+@api_view(['GET', 'DELETE'])
+def scheduled_activity(request, user_id, scheduled_activity_id):
+    if request.method == 'GET':
+        try:
+            queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
+        except:
+            return HttpResponse('Record not found', status=404)
 
-def scheduled_activity_show(request, user_id, scheduled_activity_id):
-    queryset = ScheduledActivity.objects.get(id=scheduled_activity_id)
-    serializer = ScheduledActivitySerializer(queryset)
-    return JsonResponse(serializer.data)
+        serializer = ScheduledActivitySerializer(queryset)
+        return JsonResponse(serializer.data)
 
+    elif request.method == 'DELETE':
+        try:
+            scheduled_activity = ScheduledActivity.objects.get(id=scheduled_activity_id)
+        except:
+            return HttpResponse('Record not found', status=404)
+
+        try:
+            scheduled_activity.delete()
+            return HttpResponse('Deleted successfully', status=204)
+        except:
+            return HttpResponse('Unable to delete record', status=500)
 
 def user_scheduled_activity_index(request, user_id):
     queryset = User.objects.get(id=user_id)
