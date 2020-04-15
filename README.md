@@ -236,3 +236,11 @@
     ]
 }
 ```
+
+- DELETE `/api/v1/users/:user_id/scheduled_activities/:scheduled_activity_id`
+
+If request is successful, will return `204` status and `Deleted successfully` message.
+
+If record cannot be found based off the ID provided in the URL, will return `404` and `Record not found` message.
+
+If server runs into an error when trying to delete a record, will raise `500` error and `Unable to delete record` message.
