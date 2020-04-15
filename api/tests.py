@@ -100,16 +100,37 @@ class NewScheduledActivity(TestCase):
 
         self.assertEqual(200, response.status_code)
 
-    def test_it_errors_gracefully(self):
-        activity = Activity.objects.create(name="Not A Real Activity")
+    def test_it_raises_specific_errors_when_failing(self):
+        activity = Activity.objects.create(name="Cricket")
 
         user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
 
         c = Client()
-        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": f"{activity.name}", "date": "2020-04-20", "location": "Golden, CO"})
+
+        # bad user id
+        response = c.post(f'/api/v1/users/5/scheduled_activities/new', {"activity_name": f"{activity.name}", "date": "2020-04-20", "location": "Golden, CO"})
 
         self.assertEqual(404, response.status_code)
-        
+        self.assertEqual("User with ID 5 could not be found.", response.json())
+
+        # bad activity name
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": "A fake activity", "date": "2020-04-20", "location": "Golden, CO"})
+
+        self.assertEqual(404, response.status_code)
+        self.assertEqual("Activity with that name could not be found.", response.json())
+
+        # bad location provided
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": f"{activity.name}", "date": "2020-04-20", "location": "asdfasdg"})
+
+        self.assertEqual(500, response.status_code)
+        self.assertEqual("The location provided could not be geocoded. Please be more specific (include state or country).", response.json())
+
+        # bad date format
+        response = c.post(f'/api/v1/users/{user.id}/scheduled_activities/new', {"activity_name": f"{activity.name}", "date": "08/22/2020", "location": "Golden, CO"})
+
+        self.assertEqual(400, response.status_code)
+        self.assertEqual("The date provided could not be parsed correctly. Please ensure it is in the format of 'YYYY-MM-DD'", response.json())
+
     def test_status_property(self):
         activity = Activity.objects.create(name="Kayaking")
 
