@@ -86,7 +86,7 @@ class GeocodeServiceTestCase(TestCase):
 
         service = GeocodeService()
         response = service.get_coordinates('denver,co')
-        self.assertEqual(response, expected_response)
+        self.assertEqual(response["geometry"]["location"], expected_response)
 
 
 class NewScheduledActivity(TestCase):
