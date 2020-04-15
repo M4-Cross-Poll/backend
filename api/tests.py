@@ -3,7 +3,7 @@ from api.external_services.darksky_service import DarkskyService
 from api.external_services.geocode_service import GeocodeService
 from django.test import Client
 from api.models import *
-# Create your tests here.
+from django.core.management import call_command
 
 class DarkskyServiceTestCase(TestCase):
     def test_service_returns_json_of_forecast(self):
@@ -196,3 +196,42 @@ class NewScheduledActivity(TestCase):
         response = c.delete(f'/api/v1/users/{user.id}/scheduled_activities/5')
 
         self.assertEqual(404, response.status_code)
+
+
+class ScheduledActivityManagementCommandTest(TestCase):
+    def test_script_commmand(self):
+        activity = Activity.objects.create(name="Kayaking")
+
+        user = User.objects.create(username="test_user", first_name="Test", last_name="Name", email="test@example.com")
+
+        scheduled_activity_1 = ScheduledActivity.objects.create(
+            date="2020-04-14",
+            location="Denver, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        scheduled_activity_2 = ScheduledActivity.objects.create(
+            date="2020-04-19",
+            location="Fort Collins, CO",
+            forecast="Sunny",
+            forecast_img="sunny",
+            temperature=45.20,
+            temp_hi=60.00,
+            temp_low=23.00,
+            precip_probability=0.07,
+            activity=activity,
+            user=user
+            )
+
+        breakpoint()
+
+        call_command('script')
+
+        breakpoint()
