@@ -59,27 +59,42 @@ def user_scheduled_activity_index(request, user_id):
 
 @api_view(['POST'])
 def create_scheduled_activity(request, user_id):
-    activity = Activity.objects.get(name=request.data["activity_name"])
+    try:
+        activity = Activity.objects.get(name=request.data["activity_name"])
+    except:
+        return JsonResponse(f"Activity could not be found.", status=404, safe=False)
+
     date = parse_date(request.data["date"])
     location = request.data["location"]
-    user = User.objects.get(id=user_id)
 
-    coordinates = GeocodeService().get_coordinates(location)
+    try:
+        user = User.objects.get(id=user_id)
+    except:
+        return JsonResponse(f"User with ID {user_id} could not be found.", status=404, safe=False)
+
+    try:
+        coordinates = GeocodeService().get_coordinates(location)
+    except:
+        return HttpResponse(f"A location could not be designated using that input", status=400)
+
 
     forecast = DarkskyService().get_forecast(coordinates["lat"], coordinates["lng"], date)
 
-    new_scheduled_activity = ScheduledActivity.objects.create(
-        date=request.data["date"],
-        location=location,
-        forecast=forecast["daily"]["data"][0]["summary"],
-        forecast_img=forecast["daily"]["data"][0]["icon"],
-        temperature=forecast["currently"]["temperature"],
-        temp_hi=forecast["daily"]["data"][0]["temperatureHigh"],
-        temp_low=forecast["daily"]["data"][0]["temperatureLow"],
-        precip_probability=forecast["daily"]["data"][0]["precipProbability"],
-        activity=activity,
-        user=user
-        )
+    try:
+        new_scheduled_activity = ScheduledActivity.objects.create(
+            date=request.data["date"],
+            location=location,
+            forecast=forecast["daily"]["data"][0]["summary"],
+            forecast_img=forecast["daily"]["data"][0]["icon"],
+            temperature=forecast["currently"]["temperature"],
+            temp_hi=forecast["daily"]["data"][0]["temperatureHigh"],
+            temp_low=forecast["daily"]["data"][0]["temperatureLow"],
+            precip_probability=forecast["daily"]["data"][0]["precipProbability"],
+            activity=activity,
+            user=user
+            )
+    except:
+        return HttpResponse("An error occurred while trying to create the scheduled_activity", status=500)
 
     serializer = ScheduledActivitySerializer(new_scheduled_activity)
     return JsonResponse(serializer.data, safe=False)
