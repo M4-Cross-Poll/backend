@@ -61,24 +61,24 @@ def user_scheduled_activity_index(request, user_id):
 def create_scheduled_activity(request, user_id):
     try:
         activity = Activity.objects.get(name=request.data["activity_name"])
-    except:
-        return JsonResponse(f"Activity could not be found.", status=404, safe=False)
+        user = User.objects.get(id=user_id)
+    except Activity.DoesNotExist:
+        return JsonResponse(f"Activity with that name could not be found.", status=404, safe=False)
+    except User.DoesNotExist:
+        return JsonResponse(f"User with ID {user_id} could not be found.", status=404, safe=False)
 
-    date = parse_date(request.data["date"])
     location = request.data["location"]
 
     try:
-        user = User.objects.get(id=user_id)
-    except:
-        return JsonResponse(f"User with ID {user_id} could not be found.", status=404, safe=False)
+        coordinates = GeocodeService().get_coordinates(location)
+    except NameError:
+        return JsonResponse(f"The location provided could not be geocoded. Please be more specific (include state or country).", status=500, safe=False)
 
     try:
-        coordinates = GeocodeService().get_coordinates(location)
+        date = parse_date(request.data["date"])
+        forecast = DarkskyService().get_forecast(coordinates["lat"], coordinates["lng"], date)
     except:
-        return HttpResponse(f"A location could not be designated using that input", status=400)
-
-
-    forecast = DarkskyService().get_forecast(coordinates["lat"], coordinates["lng"], date)
+        return JsonResponse("The date provided could not be parsed correctly. Please ensure it is in the format of 'YYYY-MM-DD'", status=400, safe=False)
 
     try:
         new_scheduled_activity = ScheduledActivity.objects.create(
@@ -94,7 +94,7 @@ def create_scheduled_activity(request, user_id):
             user=user
             )
     except:
-        return HttpResponse("An error occurred while trying to create the scheduled_activity", status=500)
+        return JsonResponse("An error occurred while trying to create the scheduled_activity", status=500, safe=False)
 
     serializer = ScheduledActivitySerializer(new_scheduled_activity)
     return JsonResponse(serializer.data, safe=False)
