@@ -35,6 +35,26 @@ The backend for Rain or Shine is developed using Python and Django. Through vari
 
 2. Install dependencies: `pip3 install -r requirements.txt`
 
+3. Our application uses a Postgres database, if you do not have Postgres installed on your machine, follow the instructions on [Postgres' Download Page](https://www.postgresql.org/download/) (we suggest using Homebrew to install if you're using a Mac).
+
+4. Create a Postgres database on your local machine by going into postgres `psql` from your terminal and typing `CREATE DATABASE rain_or_shine_development;`.
+
+5. Once you have set up your database, seed the database with our fixture data:
+    - `python3 manage.py loaddata api/fixtures/fixture_activities.json`
+    - `python3 manage.py loaddata api/fixtures/fixture_musclegroups.json`
+    - `python3 manage.py loaddata api/fixtures/fixture_exercises.json`
+    - `python3 manage.py loaddata api/fixtures/fixture_activitymusclegroups.json`
+    - `python3 manage.py loaddata api/fixtures/fixture_exercisemusclegroups.json`
+    
+6. Our backend utilizes two external APIs in order to grab forecast information for a given location and date. You will need to sign up for an API Key for Google's Geocoding API and Darksky Weather API.
+
+7. Once you have done so, create a `.env` file in the root of the project (alongside the `manage.py`) and input your API keys:
+```
+GEOCODE_API_KEY = <YOUR_API_KEY>
+DARKSKY_API_KEY = <YOUR_API_KEY>
+```
+
+
 
 
 ## Database Structure
