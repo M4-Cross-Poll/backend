@@ -1,4 +1,41 @@
-# Backend Django App for Rain or Shine
+# Rain or Shine (Backend)
+
+[Heroku](https://rain-or-shine-backend.herokuapp.com/)
+
+[Frontend Repository](https://rain-or-shine-backend.herokuapp.com/)
+
+### Description
+
+Rain or Shine is a mobile app developed for Andriod and iOS. The application allows users to scheduled outdoor activities (such as hiking, mountain biking, kayaking, etc.) for a specified date and location. Rain or Shine will check the forecast at that location, and if the forecast is bad or would hinder them doing that activity due to rain, snow/sleet, or extreme wind, Rain or Shine will return a list of exercises the user can do that target the same muscle groups as that outdoor activity.
+
+The backend for Rain or Shine is developed using Python and Django. Through various endpoints, our backend provides detailed information to our React Native frontend and also retrieves and synthesizes forecast data for scheduled activities on a daily basis. 
+
+### Contents
+- [Contributors](#contributors)
+- [Getting Started](#getting-started)
+- [Database Structure](#database-structure)
+- [Endpoints](#endpoints)
+
+## Contributors
+Backend Developers
+---
+[Darren Campbell](https://github.com/darren2802)
+[Dylan Connolly](https://github.com/dylanconnolly)
+
+Frontend Developers
+---
+[Grayson Palmer](https://github.com/grayson-palmer)
+[Johnny Cassidy](https://github.com/pJanks)
+
+## Getting Started
+
+1. Clone this repo: `git clone git@github.com:M4-Cross-Poll/backend.git`
+
+2. Install dependencies: `pip3 install -r requirements.txt`
+
+
+
+## Database Structure
 
 
 ## Endpoints
