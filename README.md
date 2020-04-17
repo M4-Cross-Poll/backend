@@ -49,6 +49,8 @@ The backend for Rain or Shine is developed using Python and Django. Through vari
 - [Exercise Show](#exercise-show)
 - [Activities Index](#activities-index)
 - [Scheduled Activity Show](#scheduled-activity-show)
+- [Scheduled Activity Index](#scheduled-activity-index)
+- [Delete Scheduled Activity](#delete-scheduled-activity)
 
 
 
@@ -261,7 +263,6 @@ Will raise a `404` error and message if the scheduled_activity by the given ID d
 Will return all `scheduled_activities` for a given `user_id`.
 
 
-
 - GET `/api/v1/users/:user_id/scheduled_activities`
 ```
 {
@@ -310,10 +311,14 @@ Will return all `scheduled_activities` for a given `user_id`.
 }
 ```
 
+### Delete Scheduled Activity
+
+Will delete the specified scheduled record for the specified user.
+
 - DELETE `/api/v1/users/:user_id/scheduled_activities/:scheduled_activity_id`
 
-If request is successful, will return `204` status and `Deleted successfully` message.
+- If request is successful, will return `204` status and `Deleted successfully` message.
 
-If record cannot be found based off the ID provided in the URL, will return `404` and `Record not found` message.
+- If record cannot be found based off the ID provided in the URL, will return `404` and `Record not found` message.
 
-If server runs into an error when trying to delete a record, will raise `500` error and `Unable to delete record` message.
+- If server runs into an error when trying to delete a record, will raise `500` error and `Unable to delete record` message.
