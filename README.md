@@ -17,14 +17,16 @@ The backend for Rain or Shine is developed using Python and Django. Through vari
 - [Endpoints](#endpoints)
 
 ## Contributors
-Backend Developers
----
+#### Backend Developers
+
 [Darren Campbell](https://github.com/darren2802)
+
 [Dylan Connolly](https://github.com/dylanconnolly)
 
-Frontend Developers
----
+#### Frontend Developers
+
 [Grayson Palmer](https://github.com/grayson-palmer)
+
 [Johnny Cassidy](https://github.com/pJanks)
 
 ## Getting Started
@@ -37,8 +39,22 @@ Frontend Developers
 
 ## Database Structure
 
+![image](https://user-images.githubusercontent.com/54859243/79590069-af6e2300-8093-11ea-8dcf-c0962063d881.png)
+
 
 ## Endpoints
+
+#### Navigation
+- [Exercise Index](#exercise-index)
+- [Exercise Show](#exercise-show)
+- [Activities Index](#activities-index)
+- [Scheduled Activity Show](#scheduled-activity-show)
+
+
+
+### Exercise Index
+
+Returns a list of all exercises and their details.
 
 - GET `/api/v1/exercises`
 ```
@@ -70,6 +86,10 @@ Frontend Developers
     ...
 ]
 ```
+
+### Exercise Show
+
+Returns a single exercise specified by it's id.
 
 - GET `/api/v1/exercise/<int:exercise_id>`
 ```
@@ -109,6 +129,10 @@ Frontend Developers
 }
 ```
 
+### Activities Index
+
+Returns list of all activities
+
 - GET `/api/v1/activities`
 ```
 [
@@ -126,6 +150,10 @@ Frontend Developers
     },
     ...
 ```
+
+### Scheduled Activity Show
+
+Returns a specific scheduled activity for a given `user_id` and `scheduled_activity_id`.
 
 - GET `/api/v1/user/<int:user_id>/scheduled_activities/<int:scheduled_activity_id>`
 
@@ -225,6 +253,14 @@ Frontend Developers
     "updated_at": "2020-04-14T00:44:31.125857Z"
 }
 ```
+
+Will raise a `404` error and message if the scheduled_activity by the given ID does not exist for that user.
+
+### Scheduled Activity Index
+
+Will return all `scheduled_activities` for a given `user_id`.
+
+
 
 - GET `/api/v1/users/:user_id/scheduled_activities`
 ```
